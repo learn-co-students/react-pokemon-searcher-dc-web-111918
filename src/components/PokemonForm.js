@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
 
+
 class PokemonForm extends React.Component {
   constructor() {
     super()
@@ -13,11 +14,24 @@ class PokemonForm extends React.Component {
     }
   }
 
+  onTypingChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.addNewPokemon(this.state)
+    e.target.reset()
+  }
+
   render() {
+    // console.log(this.props)
     return (
       <div>
         <h3>Add a Pokemon!</h3>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onChange={this.onTypingChange} onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
             <Form.Input fluid label="Name" placeholder="Name" name="name" />
             <Form.Input fluid label="hp" placeholder="hp" name="hp" />
